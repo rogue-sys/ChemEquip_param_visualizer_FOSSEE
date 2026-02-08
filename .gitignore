@@ -1,0 +1,32 @@
+# =========================
+# Root-level data files
+# =========================
+/*.csv
+
+# =========================
+# Python / Django
+# =========================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+venv/
+env/
+
+# =========================
+# React handled by frontend_react/.gitignore
+# (do NOT duplicate node_modules here)
+# =========================
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# IDE / Editor
+# =========================
+.vscode/
+.idea/
