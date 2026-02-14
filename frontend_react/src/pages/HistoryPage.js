@@ -10,7 +10,6 @@ function HistoryPage() {
     API.get("history/").then((res) => setHistory(res.data));
   }, []);
 
-  // 🔧 Format ISO datetime → "07 Feb 2026, 09:41"
   const formatDateTime = (isoString) => {
     const date = new Date(isoString);
     return date.toLocaleString("en-IN", {
@@ -24,43 +23,55 @@ function HistoryPage() {
   };
 
   return (
-    <div style={{ padding: "30px", maxWidth: "900px", margin: "auto" }}>
-      <button onClick={() => navigate("/dashboard")}>
+  <div className="py-10 px-4 text-slate-200">
+    <div className="max-w-4xl mx-auto">
+
+      {/* Back Button */}
+      <button
+        onClick={() => navigate("/dashboard")}
+        className="text-sm text-slate-400 hover:text-white transition mb-4"
+      >
         ← Back to Dashboard
       </button>
 
-      <h2 style={{ marginTop: "20px" }}>Upload History</h2>
+      {/* Heading */}
+      <h2 className="text-2xl font-semibold text-white mb-6">
+        Uploaded History
+      </h2>
 
       {history.length === 0 ? (
-        /* ✅ Empty state */
-        <p style={{ marginTop: "20px", color: "#666" }}>
+        <p className="text-slate-400">
           No history yet…
         </p>
       ) : (
-        /* ✅ History table */
-        <table border="1" width="100%" style={{ marginTop: "20px" }}>
-          <thead>
-            <tr>
-              <th>Filename</th>
-              <th>Uploaded At</th>
-            </tr>
-          </thead>
-          <tbody>
-            {history.map((h) => (
-              <tr
-                key={h.id}
-                style={{ cursor: "pointer" }}
-                onClick={() => navigate(`/summary/${h.id}`)}
-              >
-                <td>{h.filename}</td>
-                <td>{formatDateTime(h.uploaded_at)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className="space-y-4">
+          {history.map((h) => (
+            <div
+              key={h.id}
+              onClick={() => navigate(`/summary/${h.id}`)}
+              className="
+                bg-slate-50 text-gray-900
+                rounded-xl border border-slate-200
+                p-5 cursor-pointer
+                hover:shadow-lg hover:scale-[1.02]
+                transition
+              "
+            >
+              <p className="font-medium">
+                {h.filename}
+              </p>
+              <p className="text-sm text-gray-500">
+                Uploaded: {formatDateTime(h.uploaded_at)}
+              </p>
+            </div>
+          ))}
+        </div>
       )}
+
     </div>
-  );
+  </div>
+);
+
 }
 
 export default HistoryPage;

@@ -52,41 +52,60 @@ function UploadCSV({ onUpload }) {
   };
 
   return (
-    <div>
-      <h3>Upload CSV</h3>
+    <div className="space-y-4">
+      <h3 className="text-lg font-semibold text-gray-800">
+        Upload CSV
+      </h3>
 
-      <input
-        type="file"
-        accept=".csv"
-        onChange={handleFileChange}
-        disabled={isUploading}
-      />
+      <div className="flex items-center gap-4">
+        <input
+          type="file"
+          accept=".csv"
+          onChange={handleFileChange}
+          disabled={isUploading}
+          className="
+            block w-full text-sm text-gray-600
+            file:mr-4 file:py-2 file:px-4
+            file:rounded-lg file:border-0
+            file:bg-gray-100 file:text-gray-700
+            hover:file:bg-gray-200
+          "
+        />
+
+        <button
+          onClick={handleUpload}
+          disabled={!file || isUploading}
+          className={`
+            px-5 py-2 rounded-lg text-sm font-medium
+            transition
+            ${
+              !file || isUploading
+                ? "bg-gray-300 text-gray-600 cursor-not-allowed"
+                : "bg-blue-600 text-white hover:bg-blue-500"
+            }
+          `}
+        >
+          {isUploading ? "Uploading..." : "Upload"}
+        </button>
+      </div>
 
       {file && !isUploading && (
-        <p style={{ fontSize: "13px", marginTop: "6px" }}>
+        <p className="text-sm text-gray-500">
           Selected: {file.name}
         </p>
       )}
 
       {isUploading && (
-        <p style={{ color: "#0072ff", marginTop: "10px" }}>
+        <p className="text-sm text-blue-600">
           Uploading… please wait
         </p>
       )}
 
-      {!isUploading && error && (
-        <p style={{ color: "red", marginTop: "10px" }}>
+      {error && !isUploading && (
+        <p className="text-sm text-red-600">
           {error}
         </p>
       )}
-
-      <button
-        onClick={handleUpload}
-        disabled={!file || isUploading}
-        style={{ marginTop: "10px" }}
-      >
-        {isUploading ? "Uploading..." : "Upload"}
-      </button>
     </div>
   );
 }

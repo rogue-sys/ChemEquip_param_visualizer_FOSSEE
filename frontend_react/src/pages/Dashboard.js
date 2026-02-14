@@ -14,10 +14,22 @@ function Dashboard() {
   };
 
   return (
-    <div style={{ padding: "30px", maxWidth: "700px", margin: "auto" }}>
-      <h2>Dashboard</h2>
+    <div className="px-4 py-10">
+      <div className="max-w-2xl mx-auto">
+        {/* Card */}
+        <div className="bg-white rounded-2xl shadow-lg border p-8">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-2">
+            Dashboard
+          </h2>
 
-      <UploadCSV onUpload={handleUpload} />
+          <p className="text-gray-500 mb-6">
+            Upload a CSV file to visualize and analyze chemical equipment
+            parameters.
+          </p>
+
+          <UploadCSV onUpload={handleUpload} />
+        </div>
+      </div>
     </div>
   );
 }

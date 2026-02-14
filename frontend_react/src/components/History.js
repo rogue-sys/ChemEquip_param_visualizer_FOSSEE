@@ -3,7 +3,7 @@ import React from "react";
 function History({ history }) {
   return (
     <div>
-      <h3>Upload History (Last 5)</h3>
+      <h3> Upload History (Last 5)</h3>
       <table border="1">
         <thead>
           <tr>

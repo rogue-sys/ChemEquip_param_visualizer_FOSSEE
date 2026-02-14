@@ -31,74 +31,86 @@ function SummaryPage() {
     });
 
     const imgData = canvas.toDataURL("image/png");
-
     const pdf = new jsPDF("p", "mm", "a4");
 
     const pageWidth = pdf.internal.pageSize.getWidth();
-    const pageHeight = pdf.internal.pageSize.getHeight();
-
-    const imgWidth = pageWidth * 0.9; // leave margins
+    const imgWidth = pageWidth * 0.9;
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
     const xOffset = (pageWidth - imgWidth) / 2;
-    const yOffset = 15; // top margin
-
-    // Handle overflow to next page (basic)
-    if (imgHeight > pageHeight) {
-      let heightLeft = imgHeight;
-      let position = yOffset;
-
-      pdf.addImage(imgData, "PNG", xOffset, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
-
-      while (heightLeft > 0) {
-        pdf.addPage();
-        position = heightLeft - imgHeight;
-        pdf.addImage(imgData, "PNG", xOffset, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
-      }
-    } else {
-      pdf.addImage(imgData, "PNG", xOffset, yOffset, imgWidth, imgHeight);
-    }
-
+    pdf.addImage(imgData, "PNG", xOffset, 15, imgWidth, imgHeight);
     pdf.save(`${dataset.filename}_summary.pdf`);
   };
 
   if (!dataset) {
-    return <p style={{ padding: "30px" }}>Loading summary...</p>;
+    return (
+      <div className="p-8 text-gray-500">
+        Loading summary...
+      </div>
+    );
   }
 
   return (
-    <div style={{ padding: "30px", maxWidth: "900px", margin: "auto" }}>
-      <button onClick={() => navigate("/dashboard")}>
+  <div className="py-10 px-4 text-slate-200">
+    <div className="max-w-4xl mx-auto">
+
+      {/* Back Button */}
+      <button
+        onClick={() => navigate("/dashboard")}
+        className="text-sm text-slate-400 hover:text-white transition mb-4"
+      >
         ← Back to Dashboard
       </button>
 
-      <h2 style={{ marginTop: "20px" }}>Summary</h2>
+      {/* Heading */}
+      <h2 className="text-2xl font-semibold text-white mb-6">
+        Summary
+      </h2>
 
-      {/* 📄 CONTENT FOR PDF */}
-      <div ref={reportRef}>
-        <Summary summary={dataset.summary} />
+      {/* PDF CONTENT */}
+      <div ref={reportRef} className="space-y-6">
+        <div className="bg-slate-50 text-gray-900 rounded-2xl shadow-lg p-6">
+          <Summary summary={dataset.summary} />
+        </div>
 
         {showCharts && (
-          <div style={{ marginTop: "30px" }}>
+          <div className="bg-slate-50 text-gray-900 rounded-2xl shadow-lg p-6">
             <Charts summary={dataset.summary} />
           </div>
         )}
       </div>
 
       {/* ACTION BUTTONS */}
-      <div style={{ marginTop: "25px", display: "flex", gap: "12px" }}>
-        <button onClick={() => setShowCharts(!showCharts)}>
+      <div className="mt-6 flex gap-3">
+        <button
+          onClick={() => setShowCharts(!showCharts)}
+          className="
+            px-4 py-2 rounded-lg
+            bg-slate-700 text-white
+            hover:bg-slate-600
+            transition
+          "
+        >
           {showCharts ? "Hide Charts" : "View Charts"}
         </button>
 
-        <button onClick={generatePDF}>
-          📄 Download PDF Report
+        <button
+          onClick={generatePDF}
+          className="
+            px-4 py-2 rounded-lg
+            bg-indigo-600 text-white
+            hover:bg-indigo-500
+            transition
+          "
+        >
+          📄 Download PDF
         </button>
       </div>
+
     </div>
-  );
+  </div>
+);
+
 }
 
 export default SummaryPage;

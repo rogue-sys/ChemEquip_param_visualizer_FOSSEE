@@ -30,11 +30,11 @@ function Charts({ summary }) {
         label: "Equipment Count",
         data: Object.values(summary.type_distribution),
         backgroundColor: [
-          "#4CAF50",
-          "#2196F3",
-          "#FFC107",
-          "#E91E63",
-          "#9C27B0",
+          "#22c55e", // green
+          "#3b82f6", // blue
+          "#facc15", // yellow
+          "#ec4899", // pink
+          "#8b5cf6", // violet
         ],
         borderColor: "#ffffff",
         borderWidth: 2,
@@ -44,14 +44,17 @@ function Charts({ summary }) {
 
   const pieOptions = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       title: {
-        display: true,
-        text: "Equipment Type Distribution",
-        font: { size: 18 },
+        display: false, // handled by UI heading
       },
       legend: {
         position: "bottom",
+        labels: {
+          boxWidth: 14,
+          padding: 16,
+        },
       },
     },
   };
@@ -67,19 +70,22 @@ function Charts({ summary }) {
           summary.avg_pressure,
           summary.avg_temperature,
         ],
-        backgroundColor: ["#3F51B5", "#009688", "#FF5722"],
-        borderRadius: 6,
+        backgroundColor: [
+          "#6366f1", // indigo
+          "#14b8a6", // teal
+          "#f97316", // orange
+        ],
+        borderRadius: 8,
       },
     ],
   };
 
   const barOptions = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       title: {
-        display: true,
-        text: "Average Equipment Parameters",
-        font: { size: 18 },
+        display: false, // handled by UI heading
       },
       legend: {
         display: false,
@@ -88,19 +94,43 @@ function Charts({ summary }) {
     scales: {
       y: {
         beginAtZero: true,
+        grid: {
+          color: "#e5e7eb",
+        },
+      },
+      x: {
+        grid: {
+          display: false,
+        },
       },
     },
   };
 
   return (
-    <div style={{ marginTop: "30px" }}>
-      <div style={{ width: "400px", margin: "0 auto" }}>
-        <Pie data={pieData} options={pieOptions} />
+    <div className="space-y-8">
+      
+      {/* PIE CHART CARD */}
+      <div className="bg-gray-50 rounded-xl p-6">
+        <h3 className="text-lg font-semibold text-gray-800 mb-4 text-center">
+          Equipment Type Distribution
+        </h3>
+
+        <div className="relative h-[320px] max-w-md mx-auto">
+          <Pie data={pieData} options={pieOptions} />
+        </div>
       </div>
 
-      <div style={{ width: "600px", margin: "40px auto" }}>
-        <Bar data={barData} options={barOptions} />
+      {/* BAR CHART CARD */}
+      <div className="bg-gray-50 rounded-xl p-6">
+        <h3 className="text-lg font-semibold text-gray-800 mb-4 text-center">
+          Average Equipment Parameters
+        </h3>
+
+        <div className="relative h-[360px] max-w-2xl mx-auto">
+          <Bar data={barData} options={barOptions} />
+        </div>
       </div>
+
     </div>
   );
 }

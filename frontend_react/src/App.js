@@ -22,7 +22,9 @@ function App() {
   }, []);
 
   return (
-    <BrowserRouter>
+  <BrowserRouter>
+    <div className="min-h-screen bg-gradient-to-br from-slate-800 via-slate-700 to-blue-900">
+
       {loggedIn && <Header />}
 
       <Routes>
@@ -59,8 +61,10 @@ function App() {
 
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
-    </BrowserRouter>
-  );
+    </div>
+  </BrowserRouter>
+);
+
 }
 
 export default App;
