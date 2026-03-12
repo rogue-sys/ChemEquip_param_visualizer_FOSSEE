@@ -1,10 +1,8 @@
 # =========================
 # Root-level data files
 # =========================
-
 *.csv
 !sample_data/sample_equipment_data.csv
-
 
 # =========================
 # Python / Django
@@ -13,14 +11,17 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
+*.log
 .env
 venv/
 env/
 
 # =========================
-# React handled by frontend_react/.gitignore
-# (do NOT duplicate node_modules here)
+# Django
 # =========================
+db.sqlite3
+staticfiles/
+media/
 
 # =========================
 # OS files
@@ -33,3 +34,8 @@ Thumbs.db
 # =========================
 .vscode/
 .idea/
+
+# =========================
+# React handled separately
+# =========================
+# frontend_react/.gitignore
