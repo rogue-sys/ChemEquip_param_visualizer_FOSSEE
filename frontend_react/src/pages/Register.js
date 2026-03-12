@@ -19,9 +19,7 @@ function Register() {
     const timer = setTimeout(async () => {
       try {
         setChecking(true);
-        const res = await API.get(
-          `check-username/?username=${username}`
-        );
+        const res = await API.get(`check-username/?username=${username}`);
         setUsernameExists(res.data.exists);
       } catch {
         setUsernameExists(false);
@@ -70,13 +68,9 @@ function Register() {
               {checking ? (
                 "Checking availability..."
               ) : usernameExists ? (
-                <span className="username-error">
-                  Username already exists
-                </span>
+                <span className="username-error">Username already exists</span>
               ) : (
-                <span className="username-ok">
-                  Username available
-                </span>
+                <span className="username-ok">Username available</span>
               )}
             </div>
           )}
@@ -109,9 +103,7 @@ function Register() {
 
         {msg && (
           <div
-            className={
-              msg.includes("created") ? "auth-success" : "auth-error"
-            }
+            className={msg.includes("created") ? "auth-success" : "auth-error"}
           >
             {msg}
           </div>
@@ -122,6 +114,17 @@ function Register() {
           <span className="auth-link" onClick={() => navigate("/login")}>
             Login
           </span>
+        </div>
+
+        <div className="desktop-download">
+          <a
+            href="https://github.com/rogue-sys/ChemEquip_param_visualizer_FOSSEE/releases/download/v1.0/ChemEquip-v1.0.exe"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="desktop-download-btn"
+          >
+            Download ChemEquip Desktop
+          </a>
         </div>
       </div>
     </div>

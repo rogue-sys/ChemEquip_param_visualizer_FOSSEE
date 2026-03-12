@@ -130,3 +130,21 @@ input:-webkit-autofill {
   -webkit-text-fill-color: #ffffff !important;
   transition: background-color 5000s ease-in-out 0s;
 }
+
+/* Desktop version redirect styling */
+.desktop-download {
+  margin-top: 18px;
+  text-align: center;
+  width: 100%;
+}
+
+.desktop-download-btn {
+  font-size: 14px;
+  color: #00c6ff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.desktop-download-btn:hover {
+  text-decoration: underline;
+}

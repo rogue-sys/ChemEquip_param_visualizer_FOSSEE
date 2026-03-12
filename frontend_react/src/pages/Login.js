@@ -18,7 +18,7 @@ function Login({ onLogin }) {
     try {
       const res = await API.post(
         "login/",
-        new URLSearchParams({ username, password })
+        new URLSearchParams({ username, password }),
       );
 
       const token = res.data.token;
@@ -74,6 +74,17 @@ function Login({ onLogin }) {
           <span className="auth-link" onClick={() => navigate("/register")}>
             Create an account
           </span>
+        </div>
+
+        <div className="desktop-download">
+          <a
+            href="https://github.com/rogue-sys/ChemEquip_param_visualizer_FOSSEE/releases/download/v1.0/ChemEquip-v1.0.exe"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="desktop-download-btn"
+          >
+            Download ChemEquip Desktop
+          </a>
         </div>
       </div>
     </div>
